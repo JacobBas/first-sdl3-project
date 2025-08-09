@@ -1,0 +1,50 @@
+# C++ CMake template .gitignore
+
+## 1. Ignore the Build Directory
+# This is the most important rule. It excludes all generated Makefiles,
+# project files, object files, and the final executable.
+build/
+_build/
+out/
+.cache/
+
+## 2. Ignore IDE and Editor-Specific Files
+# Prevents user-specific settings from being committed.
+
+# Visual Studio Code
+.vscode/
+
+# CLion / IntelliJ
+.idea/
+
+# Visual Studio
+*.sln
+*.vcxproj*
+.vs/
+
+
+## 3. Ignore Common Compiled Files
+# These are sometimes created outside the build directory.
+
+# Object files
+*.o
+*.obj
+
+# Libraries
+*.a
+*.lib
+*.so
+*.dll
+
+# Executables
+*.exe
+*.out
+*.app
+
+
+## 4. Ignore Operating System Files
+# macOS
+.DS_Store
+
+# Windows thumbnail cache
+Thumbs.db
