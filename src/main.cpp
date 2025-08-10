@@ -1,3 +1,4 @@
+#include "SDL3/SDL_render.h"
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_error.h>
 #include <SDL3/SDL_events.h>
@@ -43,6 +44,19 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
+    // create a renderer
+    state.renderer = SDL_CreateRenderer(state.window, nullptr);
+    if (!state.renderer) {
+        SDL_ShowSimpleMessageBox(
+            SDL_MESSAGEBOX_ERROR,
+            "Error",
+            "Error creating renderer",
+            state.window
+        );
+        cleanup(state);
+        return 1;
+    }
+
     // starting the game loop
     bool running = true;
     while (running) {
@@ -56,6 +70,13 @@ int main(int argc, char *argv[]) {
                 }
             }
         }
+
+        // perform our drawing commnands
+        SDL_SetRenderDrawColor(state.renderer, 255, 255, 255, 255);
+        SDL_RenderClear(state.renderer);
+
+        // swap buffers and present
+        SDL_RenderPresent(state.renderer);
     }
 
     // quiting and cleaning up the SDL3 application
@@ -64,6 +85,7 @@ int main(int argc, char *argv[]) {
 }
 
 void cleanup(SDLState &state) {
+    SDL_DestroyRenderer(state.renderer);
     SDL_DestroyWindow(state.window);
     SDL_Quit();
 }
